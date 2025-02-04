@@ -1,4 +1,5 @@
 let amigos = [];
+let amigosRestantes = [];
 
 function adicionarAmigo() {
     let input = document.getElementById("amigo");
@@ -15,6 +16,7 @@ function adicionarAmigo() {
     }
 
     amigos.push(nome);
+    amigosRestantes.push(nome);
     atualizarLista();
     input.value = "";
 }
@@ -31,15 +33,16 @@ function atualizarLista() {
 }
 
 function sortearAmigo() {
-    if (amigos.length === 0) {
-        alert("A lista de amigos está vazia! Adicione pelo menos um nome antes de sortear");
+    let resultado = document.getElementById("resultado");
+
+    if (amigosRestantes.length === 0) {
+        resultado.innerHTML = `<li>🎉 Todos os amigos já foram sorteados! 🎉</li>`;
         return;
     }
 
-    let indiceSorteado = Math.floor(Math.random() * amigos.length);
+    
+    let indiceSorteado = Math.floor(Math.random() * amigosRestantes.length);
+    let amigoSorteado = amigosRestantes.splice(indiceSorteado, 1)[0]; 
 
-    let amigoSorteado = amigos[indiceSorteado];
-
-    let resultado = document.getElementById("resultado");
-    resultado.innerHTML = `<li>Amigo Sorteado: <strong>${amigoSorteado}</strong></li>`;
+    resultado.innerHTML = `<li>🎉 Amigo Sorteado: <strong>${amigoSorteado}</strong> 🎉</li>`;
 }
